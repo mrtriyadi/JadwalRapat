@@ -14,6 +14,7 @@
         android:layout_margin="10dp"
         android:text="Silahkan Pilih Tanggal"
         android:textAlignment="center"
+
         />
 
     <DatePicker
@@ -23,6 +24,8 @@
         app:layout_constraintLeft_toLeftOf="@id/tv_title"
         app:layout_constraintRight_toRightOf="@id/tv_title"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:datePickerMode="calendar"
+        android:calendarViewShown="false"
         />
 
     <Button
