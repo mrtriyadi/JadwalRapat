@@ -24,36 +24,42 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="20dp"
         />
 
-    <EditText
-        android:id="@+id/et_hari_tanggal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Masukan Hari dan Tanggal"
+
+
+    <Button
+        android:id="@+id/btn_set_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
         app:layout_constraintTop_toBottomOf="@+id/et_judul"
+        android:layout_margin="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="Pilih Tanggal"
         />
 
-    <EditText
-        android:id="@+id/et_waktu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Masukan Waktu"
-        app:layout_constraintTop_toBottomOf="@+id/et_hari_tanggal"
+    <Button
+        android:id="@+id/btn_set_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_date"
+        android:layout_margin="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="Pilih Waktu"
         />
 
     <EditText
         android:id="@+id/et_lokasi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:hint="Masukan Lokasi Rapat"
-        app:layout_constraintTop_toBottomOf="@+id/et_waktu"
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_time"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="20dp"
         />
 
     <Button
@@ -63,6 +69,8 @@
         app:layout_constraintTop_toBottomOf="@+id/et_lokasi"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Tambah"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         />
 
     <Button

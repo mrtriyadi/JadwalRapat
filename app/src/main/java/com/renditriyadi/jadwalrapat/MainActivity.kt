@@ -1,18 +1,20 @@
 package com.renditriyadi.jadwalrapat
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.renditriyadi.jadwalrapat.databinding.LayoutCustomDialogBinding
+import com.renditriyadi.jadwalrapat.databinding.SetDateDialogBinding
+import com.renditriyadi.jadwalrapat.databinding.SetTimeDialogBinding
+import com.renditriyadi.jadwalrapat.databinding.TambahRapatDialogBinding
 
 class MainActivity : AppCompatActivity() {
-    private val dialogBinding : LayoutCustomDialogBinding
+    private lateinit var tambahRapatBinding : TambahRapatDialogBinding
+    private lateinit var setDateBinding: SetDateDialogBinding
+    private lateinit var setTimeBinding : SetTimeDialogBinding
 
     private val rvDaftarRapat: RecyclerView by lazy {
         findViewById(R.id.rv_list_rapat)
@@ -26,10 +28,6 @@ class MainActivity : AppCompatActivity() {
         RapatAdapter()
     }
 
-    private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("data_rapat", Context.MODE_PRIVATE)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         val dataRapat = Database.daftarRapat
         rapatAdapter.addDaftarRapat(dataRapat)
-        val preferencesEditor = sharedPreferences.edit()
 
         btnTambah.setOnClickListener {
             openDialogTambah()
@@ -48,29 +45,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openDialogTambah() {
-        dialogBinding = LayoutCustomDialogBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(this)
+        tambahRapatBinding = TambahRapatDialogBinding.inflate(layoutInflater)
+        val dialogTambahRapat = AlertDialog.Builder(this)
             .apply {
-                setView(dialogBinding.root)
+                setView(tambahRapatBinding.root)
             }
             .create()
 
-        if (pemenang=="SERI"){
-            dialogBinding.tvMenang.isVisible=false
-            dialogBinding.tvPemenang.text="SERI"
-        }else{
-            dialogBinding.tvMenang.isVisible=true
-            dialogBinding.tvPemenang.text=pemenang
+
+
+        tambahRapatBinding.btnSetDate.setOnClickListener {
+            setDateBinding = SetDateDialogBinding.inflate(layoutInflater)
+            val dialogSetDate = AlertDialog.Builder(this)
+                .apply{
+                    setView(setDateBinding.root)
+                }
+                .create()
+
+            setDateBinding.btnSetDate.setOnClickListener {
+
+            }
+            dialogSetDate.show()
         }
-        dialogBinding.btnMainLagi.setOnClickListener{
-            dialog.dismiss()
-            clearChoice()
+
+        tambahRapatBinding.btnSetTime.setOnClickListener {
+            setTimeBinding = SetTimeDialogBinding.inflate(layoutInflater)
+            val dialogSetTime = AlertDialog.Builder(this)
+                .apply {
+                    setView(setTimeBinding.root)
+                }
+                .create()
+            setTimeBinding.btnSetTime.setOnClickListener {
+
+            }
+            dialogSetTime.show()
         }
-        dialogBinding.btnMenu.setOnClickListener{
-            val intent= Intent(this, Menu::class.java)
-            intent.putExtra(Menu.NAME,playerName)
-            startActivity(intent)
+
+        tambahRapatBinding.btnCancel.setOnClickListener{
+            dialogTambahRapat.dismiss()
         }
-        dialog.show()
+
+        tambahRapatBinding.btnTambah.setOnClickListener{
+            TODO()
+        }
+        dialogTambahRapat.show()
     }
 }
